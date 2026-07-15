@@ -1,0 +1,14 @@
+{
+  "$id": "https://example.com/schemas/sensory_signal.schema.json",
+  "title": "SensorySignal",
+  "type": "object",
+  "required": ["zoneId", "timestamp", "noiseDb", "crowdDensity", "lightLevel"],
+  "properties": {
+    "zoneId":      { "type": "string", "pattern": "^[A-Z0-9_-]+$" },
+    "timestamp":   { "type": "string", "format": "date-time" },
+    "noiseDb":     { "type": "number", "minimum": 30, "maximum": 130 },
+    "crowdDensity":{ "type": "number", "minimum": 0, "maximum": 10, "description": "people per sqm" },
+    "lightLevel":  { "type": "number", "minimum": 0, "maximum": 1000, "description": "lumens or relative unit" }
+  },
+  "additionalProperties": false
+}

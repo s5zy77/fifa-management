@@ -1,0 +1,22 @@
+{
+  "$id": "https://example.com/schemas/dataset.schema.json",
+  "title": "StadiumDataset",
+  "type": "object",
+  "required": ["zones", "signals", "match"],
+  "properties": {
+    "zones": {
+      "type": "array",
+      "items": { "$ref": "zone.schema.json" },
+      "minItems": 1
+    },
+    "signals": {
+      "type": "array",
+      "items": { "$ref": "sensory_signal.schema.json" },
+      "minItems": 1
+    },
+    "match": {
+      "$ref": "match.schema.json"
+    }
+  },
+  "additionalProperties": false
+}

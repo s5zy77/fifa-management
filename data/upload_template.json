@@ -1,0 +1,1281 @@
+{
+  "match": {
+    "matchId": "M-2026-07-15",
+    "venueId": "V-METLIFE",
+    "kickoffTime": "2026-07-15T15:00:00Z",
+    "gatesOpenTime": "2026-07-15T12:00:00Z",
+    "expectedAttendance": 80000
+  },
+  "zones": [
+    {
+      "zoneId": "GATE-A",
+      "type": "gate",
+      "name": "North Gate A",
+      "coordinates": {
+        "x": 0.0,
+        "y": 100.0
+      },
+      "capacitySqm": 1000,
+      "adjacentZones": [
+        "CONC-NORTH"
+      ],
+      "walkTimeSeconds": 120
+    },
+    {
+      "zoneId": "GATE-B",
+      "type": "gate",
+      "name": "South Gate B",
+      "coordinates": {
+        "x": 0.0,
+        "y": -100.0
+      },
+      "capacitySqm": 1000,
+      "adjacentZones": [
+        "CONC-SOUTH"
+      ],
+      "walkTimeSeconds": 120
+    },
+    {
+      "zoneId": "CONC-NORTH",
+      "type": "concourse",
+      "name": "North Concourse",
+      "coordinates": {
+        "x": 0.0,
+        "y": 50.0
+      },
+      "capacitySqm": 5000,
+      "adjacentZones": [
+        "GATE-A",
+        "FOOD-1",
+        "SEC-101",
+        "SEC-102",
+        "RESET-N"
+      ],
+      "walkTimeSeconds": 60
+    },
+    {
+      "zoneId": "CONC-SOUTH",
+      "type": "concourse",
+      "name": "South Concourse",
+      "coordinates": {
+        "x": 0.0,
+        "y": -50.0
+      },
+      "capacitySqm": 5000,
+      "adjacentZones": [
+        "GATE-B",
+        "REST-1",
+        "SEC-103",
+        "SEC-104",
+        "RESET-S"
+      ],
+      "walkTimeSeconds": 60
+    },
+    {
+      "zoneId": "FOOD-1",
+      "type": "foodcourt",
+      "name": "North Food Court",
+      "coordinates": {
+        "x": -30.0,
+        "y": 50.0
+      },
+      "capacitySqm": 500,
+      "adjacentZones": [
+        "CONC-NORTH"
+      ],
+      "walkTimeSeconds": 30
+    },
+    {
+      "zoneId": "REST-1",
+      "type": "restroom",
+      "name": "South Restrooms",
+      "coordinates": {
+        "x": 30.0,
+        "y": -50.0
+      },
+      "capacitySqm": 200,
+      "adjacentZones": [
+        "CONC-SOUTH"
+      ],
+      "walkTimeSeconds": 30
+    },
+    {
+      "zoneId": "SEC-101",
+      "type": "seating",
+      "name": "Section 101",
+      "coordinates": {
+        "x": -20.0,
+        "y": 20.0
+      },
+      "capacitySqm": 800,
+      "adjacentZones": [
+        "CONC-NORTH"
+      ],
+      "walkTimeSeconds": 45
+    },
+    {
+      "zoneId": "SEC-102",
+      "type": "seating",
+      "name": "Section 102",
+      "coordinates": {
+        "x": 20.0,
+        "y": 20.0
+      },
+      "capacitySqm": 800,
+      "adjacentZones": [
+        "CONC-NORTH"
+      ],
+      "walkTimeSeconds": 45
+    },
+    {
+      "zoneId": "SEC-103",
+      "type": "seating",
+      "name": "Section 103",
+      "coordinates": {
+        "x": -20.0,
+        "y": -20.0
+      },
+      "capacitySqm": 800,
+      "adjacentZones": [
+        "CONC-SOUTH"
+      ],
+      "walkTimeSeconds": 45
+    },
+    {
+      "zoneId": "SEC-104",
+      "type": "seating",
+      "name": "Section 104",
+      "coordinates": {
+        "x": 20.0,
+        "y": -20.0
+      },
+      "capacitySqm": 800,
+      "adjacentZones": [
+        "CONC-SOUTH"
+      ],
+      "walkTimeSeconds": 45
+    },
+    {
+      "zoneId": "RESET-N",
+      "type": "reset",
+      "name": "North Sensory Room",
+      "coordinates": {
+        "x": 40.0,
+        "y": 60.0
+      },
+      "capacitySqm": 100,
+      "adjacentZones": [
+        "CONC-NORTH"
+      ],
+      "walkTimeSeconds": 20
+    },
+    {
+      "zoneId": "RESET-S",
+      "type": "reset",
+      "name": "South Sensory Room",
+      "coordinates": {
+        "x": -40.0,
+        "y": -60.0
+      },
+      "capacitySqm": 100,
+      "adjacentZones": [
+        "CONC-SOUTH"
+      ],
+      "walkTimeSeconds": 20
+    }
+  ],
+  "signals": [
+    {
+      "zoneId": "GATE-A",
+      "timestamp": "2026-07-15T12:00:00Z",
+      "noiseDb": 91.0,
+      "crowdDensity": 2.14,
+      "lightLevel": 781.0
+    },
+    {
+      "zoneId": "GATE-B",
+      "timestamp": "2026-07-15T12:00:00Z",
+      "noiseDb": 87.0,
+      "crowdDensity": 3.29,
+      "lightLevel": 520.0
+    },
+    {
+      "zoneId": "CONC-NORTH",
+      "timestamp": "2026-07-15T12:00:00Z",
+      "noiseDb": 96.0,
+      "crowdDensity": 3.01,
+      "lightLevel": 622.0
+    },
+    {
+      "zoneId": "CONC-SOUTH",
+      "timestamp": "2026-07-15T12:00:00Z",
+      "noiseDb": 97.0,
+      "crowdDensity": 6.27,
+      "lightLevel": 411.0
+    },
+    {
+      "zoneId": "FOOD-1",
+      "timestamp": "2026-07-15T12:00:00Z",
+      "noiseDb": 76.0,
+      "crowdDensity": 4.07,
+      "lightLevel": 356.0
+    },
+    {
+      "zoneId": "REST-1",
+      "timestamp": "2026-07-15T12:00:00Z",
+      "noiseDb": 77.0,
+      "crowdDensity": 3.17,
+      "lightLevel": 334.0
+    },
+    {
+      "zoneId": "SEC-101",
+      "timestamp": "2026-07-15T12:00:00Z",
+      "noiseDb": 103.0,
+      "crowdDensity": 6.91,
+      "lightLevel": 744.0
+    },
+    {
+      "zoneId": "SEC-102",
+      "timestamp": "2026-07-15T12:00:00Z",
+      "noiseDb": 95.0,
+      "crowdDensity": 4.93,
+      "lightLevel": 603.0
+    },
+    {
+      "zoneId": "SEC-103",
+      "timestamp": "2026-07-15T12:00:00Z",
+      "noiseDb": 113.0,
+      "crowdDensity": 4.12,
+      "lightLevel": 947.0
+    },
+    {
+      "zoneId": "SEC-104",
+      "timestamp": "2026-07-15T12:00:00Z",
+      "noiseDb": 120.0,
+      "crowdDensity": 6.09,
+      "lightLevel": 822.0
+    },
+    {
+      "zoneId": "RESET-N",
+      "timestamp": "2026-07-15T12:00:00Z",
+      "noiseDb": 37.0,
+      "crowdDensity": 0.99,
+      "lightLevel": 129.0
+    },
+    {
+      "zoneId": "RESET-S",
+      "timestamp": "2026-07-15T12:00:00Z",
+      "noiseDb": 41.0,
+      "crowdDensity": 0.89,
+      "lightLevel": 144.0
+    },
+    {
+      "zoneId": "GATE-A",
+      "timestamp": "2026-07-15T12:15:00Z",
+      "noiseDb": 81.0,
+      "crowdDensity": 2.6,
+      "lightLevel": 567.0
+    },
+    {
+      "zoneId": "GATE-B",
+      "timestamp": "2026-07-15T12:15:00Z",
+      "noiseDb": 95.0,
+      "crowdDensity": 4.46,
+      "lightLevel": 747.0
+    },
+    {
+      "zoneId": "CONC-NORTH",
+      "timestamp": "2026-07-15T12:15:00Z",
+      "noiseDb": 96.0,
+      "crowdDensity": 4.28,
+      "lightLevel": 598.0
+    },
+    {
+      "zoneId": "CONC-SOUTH",
+      "timestamp": "2026-07-15T12:15:00Z",
+      "noiseDb": 81.0,
+      "crowdDensity": 3.35,
+      "lightLevel": 832.0
+    },
+    {
+      "zoneId": "FOOD-1",
+      "timestamp": "2026-07-15T12:15:00Z",
+      "noiseDb": 75.0,
+      "crowdDensity": 5.71,
+      "lightLevel": 561.0
+    },
+    {
+      "zoneId": "REST-1",
+      "timestamp": "2026-07-15T12:15:00Z",
+      "noiseDb": 74.0,
+      "crowdDensity": 2.88,
+      "lightLevel": 337.0
+    },
+    {
+      "zoneId": "SEC-101",
+      "timestamp": "2026-07-15T12:15:00Z",
+      "noiseDb": 118.0,
+      "crowdDensity": 5.77,
+      "lightLevel": 976.0
+    },
+    {
+      "zoneId": "SEC-102",
+      "timestamp": "2026-07-15T12:15:00Z",
+      "noiseDb": 95.0,
+      "crowdDensity": 6.47,
+      "lightLevel": 738.0
+    },
+    {
+      "zoneId": "SEC-103",
+      "timestamp": "2026-07-15T12:15:00Z",
+      "noiseDb": 105.0,
+      "crowdDensity": 4.87,
+      "lightLevel": 541.0
+    },
+    {
+      "zoneId": "SEC-104",
+      "timestamp": "2026-07-15T12:15:00Z",
+      "noiseDb": 100.0,
+      "crowdDensity": 7.42,
+      "lightLevel": 500.0
+    },
+    {
+      "zoneId": "RESET-N",
+      "timestamp": "2026-07-15T12:15:00Z",
+      "noiseDb": 41.0,
+      "crowdDensity": 0.92,
+      "lightLevel": 101.0
+    },
+    {
+      "zoneId": "RESET-S",
+      "timestamp": "2026-07-15T12:15:00Z",
+      "noiseDb": 36.0,
+      "crowdDensity": 0.7,
+      "lightLevel": 119.0
+    },
+    {
+      "zoneId": "GATE-A",
+      "timestamp": "2026-07-15T12:30:00Z",
+      "noiseDb": 67.0,
+      "crowdDensity": 2.1,
+      "lightLevel": 387.0
+    },
+    {
+      "zoneId": "GATE-B",
+      "timestamp": "2026-07-15T12:30:00Z",
+      "noiseDb": 91.0,
+      "crowdDensity": 4.32,
+      "lightLevel": 792.0
+    },
+    {
+      "zoneId": "CONC-NORTH",
+      "timestamp": "2026-07-15T12:30:00Z",
+      "noiseDb": 103.0,
+      "crowdDensity": 3.31,
+      "lightLevel": 805.0
+    },
+    {
+      "zoneId": "CONC-SOUTH",
+      "timestamp": "2026-07-15T12:30:00Z",
+      "noiseDb": 70.0,
+      "crowdDensity": 6.04,
+      "lightLevel": 802.0
+    },
+    {
+      "zoneId": "FOOD-1",
+      "timestamp": "2026-07-15T12:30:00Z",
+      "noiseDb": 84.0,
+      "crowdDensity": 5.07,
+      "lightLevel": 259.0
+    },
+    {
+      "zoneId": "REST-1",
+      "timestamp": "2026-07-15T12:30:00Z",
+      "noiseDb": 76.0,
+      "crowdDensity": 4.32,
+      "lightLevel": 303.0
+    },
+    {
+      "zoneId": "SEC-101",
+      "timestamp": "2026-07-15T12:30:00Z",
+      "noiseDb": 92.0,
+      "crowdDensity": 4.65,
+      "lightLevel": 548.0
+    },
+    {
+      "zoneId": "SEC-102",
+      "timestamp": "2026-07-15T12:30:00Z",
+      "noiseDb": 102.0,
+      "crowdDensity": 4.17,
+      "lightLevel": 655.0
+    },
+    {
+      "zoneId": "SEC-103",
+      "timestamp": "2026-07-15T12:30:00Z",
+      "noiseDb": 113.0,
+      "crowdDensity": 6.79,
+      "lightLevel": 566.0
+    },
+    {
+      "zoneId": "SEC-104",
+      "timestamp": "2026-07-15T12:30:00Z",
+      "noiseDb": 90.0,
+      "crowdDensity": 3.07,
+      "lightLevel": 975.0
+    },
+    {
+      "zoneId": "RESET-N",
+      "timestamp": "2026-07-15T12:30:00Z",
+      "noiseDb": 43.0,
+      "crowdDensity": 0.64,
+      "lightLevel": 98.0
+    },
+    {
+      "zoneId": "RESET-S",
+      "timestamp": "2026-07-15T12:30:00Z",
+      "noiseDb": 30.0,
+      "crowdDensity": 0.78,
+      "lightLevel": 53.0
+    },
+    {
+      "zoneId": "GATE-A",
+      "timestamp": "2026-07-15T12:45:00Z",
+      "noiseDb": 94.0,
+      "crowdDensity": 3.42,
+      "lightLevel": 418.0
+    },
+    {
+      "zoneId": "GATE-B",
+      "timestamp": "2026-07-15T12:45:00Z",
+      "noiseDb": 81.0,
+      "crowdDensity": 3.83,
+      "lightLevel": 617.0
+    },
+    {
+      "zoneId": "CONC-NORTH",
+      "timestamp": "2026-07-15T12:45:00Z",
+      "noiseDb": 89.0,
+      "crowdDensity": 6.47,
+      "lightLevel": 658.0
+    },
+    {
+      "zoneId": "CONC-SOUTH",
+      "timestamp": "2026-07-15T12:45:00Z",
+      "noiseDb": 71.0,
+      "crowdDensity": 3.1,
+      "lightLevel": 504.0
+    },
+    {
+      "zoneId": "FOOD-1",
+      "timestamp": "2026-07-15T12:45:00Z",
+      "noiseDb": 73.0,
+      "crowdDensity": 5.84,
+      "lightLevel": 372.0
+    },
+    {
+      "zoneId": "REST-1",
+      "timestamp": "2026-07-15T12:45:00Z",
+      "noiseDb": 71.0,
+      "crowdDensity": 2.5,
+      "lightLevel": 337.0
+    },
+    {
+      "zoneId": "SEC-101",
+      "timestamp": "2026-07-15T12:45:00Z",
+      "noiseDb": 87.0,
+      "crowdDensity": 3.67,
+      "lightLevel": 811.0
+    },
+    {
+      "zoneId": "SEC-102",
+      "timestamp": "2026-07-15T12:45:00Z",
+      "noiseDb": 94.0,
+      "crowdDensity": 3.0,
+      "lightLevel": 943.0
+    },
+    {
+      "zoneId": "SEC-103",
+      "timestamp": "2026-07-15T12:45:00Z",
+      "noiseDb": 118.0,
+      "crowdDensity": 4.15,
+      "lightLevel": 910.0
+    },
+    {
+      "zoneId": "SEC-104",
+      "timestamp": "2026-07-15T12:45:00Z",
+      "noiseDb": 81.0,
+      "crowdDensity": 7.84,
+      "lightLevel": 653.0
+    },
+    {
+      "zoneId": "RESET-N",
+      "timestamp": "2026-07-15T12:45:00Z",
+      "noiseDb": 30.0,
+      "crowdDensity": 0.59,
+      "lightLevel": 57.0
+    },
+    {
+      "zoneId": "RESET-S",
+      "timestamp": "2026-07-15T12:45:00Z",
+      "noiseDb": 37.0,
+      "crowdDensity": 0.55,
+      "lightLevel": 93.0
+    },
+    {
+      "zoneId": "GATE-A",
+      "timestamp": "2026-07-15T13:00:00Z",
+      "noiseDb": 90.0,
+      "crowdDensity": 2.79,
+      "lightLevel": 567.0
+    },
+    {
+      "zoneId": "GATE-B",
+      "timestamp": "2026-07-15T13:00:00Z",
+      "noiseDb": 87.0,
+      "crowdDensity": 2.95,
+      "lightLevel": 719.0
+    },
+    {
+      "zoneId": "CONC-NORTH",
+      "timestamp": "2026-07-15T13:00:00Z",
+      "noiseDb": 82.0,
+      "crowdDensity": 5.08,
+      "lightLevel": 411.0
+    },
+    {
+      "zoneId": "CONC-SOUTH",
+      "timestamp": "2026-07-15T13:00:00Z",
+      "noiseDb": 97.0,
+      "crowdDensity": 3.99,
+      "lightLevel": 834.0
+    },
+    {
+      "zoneId": "FOOD-1",
+      "timestamp": "2026-07-15T13:00:00Z",
+      "noiseDb": 68.0,
+      "crowdDensity": 3.78,
+      "lightLevel": 497.0
+    },
+    {
+      "zoneId": "REST-1",
+      "timestamp": "2026-07-15T13:00:00Z",
+      "noiseDb": 66.0,
+      "crowdDensity": 2.06,
+      "lightLevel": 599.0
+    },
+    {
+      "zoneId": "SEC-101",
+      "timestamp": "2026-07-15T13:00:00Z",
+      "noiseDb": 112.0,
+      "crowdDensity": 7.47,
+      "lightLevel": 932.0
+    },
+    {
+      "zoneId": "SEC-102",
+      "timestamp": "2026-07-15T13:00:00Z",
+      "noiseDb": 82.0,
+      "crowdDensity": 4.11,
+      "lightLevel": 932.0
+    },
+    {
+      "zoneId": "SEC-103",
+      "timestamp": "2026-07-15T13:00:00Z",
+      "noiseDb": 112.0,
+      "crowdDensity": 6.0,
+      "lightLevel": 761.0
+    },
+    {
+      "zoneId": "SEC-104",
+      "timestamp": "2026-07-15T13:00:00Z",
+      "noiseDb": 80.0,
+      "crowdDensity": 6.57,
+      "lightLevel": 777.0
+    },
+    {
+      "zoneId": "RESET-N",
+      "timestamp": "2026-07-15T13:00:00Z",
+      "noiseDb": 43.0,
+      "crowdDensity": 0.22,
+      "lightLevel": 59.0
+    },
+    {
+      "zoneId": "RESET-S",
+      "timestamp": "2026-07-15T13:00:00Z",
+      "noiseDb": 42.0,
+      "crowdDensity": 0.27,
+      "lightLevel": 72.0
+    },
+    {
+      "zoneId": "GATE-A",
+      "timestamp": "2026-07-15T13:15:00Z",
+      "noiseDb": 63.0,
+      "crowdDensity": 1.14,
+      "lightLevel": 783.0
+    },
+    {
+      "zoneId": "GATE-B",
+      "timestamp": "2026-07-15T13:15:00Z",
+      "noiseDb": 85.0,
+      "crowdDensity": 2.32,
+      "lightLevel": 799.0
+    },
+    {
+      "zoneId": "CONC-NORTH",
+      "timestamp": "2026-07-15T13:15:00Z",
+      "noiseDb": 85.0,
+      "crowdDensity": 5.91,
+      "lightLevel": 542.0
+    },
+    {
+      "zoneId": "CONC-SOUTH",
+      "timestamp": "2026-07-15T13:15:00Z",
+      "noiseDb": 91.0,
+      "crowdDensity": 3.69,
+      "lightLevel": 756.0
+    },
+    {
+      "zoneId": "FOOD-1",
+      "timestamp": "2026-07-15T13:15:00Z",
+      "noiseDb": 68.0,
+      "crowdDensity": 3.71,
+      "lightLevel": 418.0
+    },
+    {
+      "zoneId": "REST-1",
+      "timestamp": "2026-07-15T13:15:00Z",
+      "noiseDb": 65.0,
+      "crowdDensity": 5.74,
+      "lightLevel": 420.0
+    },
+    {
+      "zoneId": "SEC-101",
+      "timestamp": "2026-07-15T13:15:00Z",
+      "noiseDb": 114.0,
+      "crowdDensity": 7.33,
+      "lightLevel": 867.0
+    },
+    {
+      "zoneId": "SEC-102",
+      "timestamp": "2026-07-15T13:15:00Z",
+      "noiseDb": 117.0,
+      "crowdDensity": 6.09,
+      "lightLevel": 947.0
+    },
+    {
+      "zoneId": "SEC-103",
+      "timestamp": "2026-07-15T13:15:00Z",
+      "noiseDb": 118.0,
+      "crowdDensity": 5.9,
+      "lightLevel": 921.0
+    },
+    {
+      "zoneId": "SEC-104",
+      "timestamp": "2026-07-15T13:15:00Z",
+      "noiseDb": 107.0,
+      "crowdDensity": 6.98,
+      "lightLevel": 827.0
+    },
+    {
+      "zoneId": "RESET-N",
+      "timestamp": "2026-07-15T13:15:00Z",
+      "noiseDb": 34.0,
+      "crowdDensity": 0.4,
+      "lightLevel": 135.0
+    },
+    {
+      "zoneId": "RESET-S",
+      "timestamp": "2026-07-15T13:15:00Z",
+      "noiseDb": 43.0,
+      "crowdDensity": 0.76,
+      "lightLevel": 138.0
+    },
+    {
+      "zoneId": "GATE-A",
+      "timestamp": "2026-07-15T13:30:00Z",
+      "noiseDb": 65.0,
+      "crowdDensity": 2.37,
+      "lightLevel": 734.0
+    },
+    {
+      "zoneId": "GATE-B",
+      "timestamp": "2026-07-15T13:30:00Z",
+      "noiseDb": 80.0,
+      "crowdDensity": 2.63,
+      "lightLevel": 557.0
+    },
+    {
+      "zoneId": "CONC-NORTH",
+      "timestamp": "2026-07-15T13:30:00Z",
+      "noiseDb": 78.0,
+      "crowdDensity": 6.08,
+      "lightLevel": 838.0
+    },
+    {
+      "zoneId": "CONC-SOUTH",
+      "timestamp": "2026-07-15T13:30:00Z",
+      "noiseDb": 75.0,
+      "crowdDensity": 3.51,
+      "lightLevel": 818.0
+    },
+    {
+      "zoneId": "FOOD-1",
+      "timestamp": "2026-07-15T13:30:00Z",
+      "noiseDb": 85.0,
+      "crowdDensity": 1.84,
+      "lightLevel": 549.0
+    },
+    {
+      "zoneId": "REST-1",
+      "timestamp": "2026-07-15T13:30:00Z",
+      "noiseDb": 69.0,
+      "crowdDensity": 5.29,
+      "lightLevel": 274.0
+    },
+    {
+      "zoneId": "SEC-101",
+      "timestamp": "2026-07-15T13:30:00Z",
+      "noiseDb": 112.0,
+      "crowdDensity": 4.42,
+      "lightLevel": 647.0
+    },
+    {
+      "zoneId": "SEC-102",
+      "timestamp": "2026-07-15T13:30:00Z",
+      "noiseDb": 118.0,
+      "crowdDensity": 4.96,
+      "lightLevel": 700.0
+    },
+    {
+      "zoneId": "SEC-103",
+      "timestamp": "2026-07-15T13:30:00Z",
+      "noiseDb": 119.0,
+      "crowdDensity": 4.15,
+      "lightLevel": 650.0
+    },
+    {
+      "zoneId": "SEC-104",
+      "timestamp": "2026-07-15T13:30:00Z",
+      "noiseDb": 97.0,
+      "crowdDensity": 6.18,
+      "lightLevel": 621.0
+    },
+    {
+      "zoneId": "RESET-N",
+      "timestamp": "2026-07-15T13:30:00Z",
+      "noiseDb": 44.0,
+      "crowdDensity": 0.91,
+      "lightLevel": 83.0
+    },
+    {
+      "zoneId": "RESET-S",
+      "timestamp": "2026-07-15T13:30:00Z",
+      "noiseDb": 44.0,
+      "crowdDensity": 0.98,
+      "lightLevel": 97.0
+    },
+    {
+      "zoneId": "GATE-A",
+      "timestamp": "2026-07-15T13:45:00Z",
+      "noiseDb": 85.0,
+      "crowdDensity": 4.97,
+      "lightLevel": 459.0
+    },
+    {
+      "zoneId": "GATE-B",
+      "timestamp": "2026-07-15T13:45:00Z",
+      "noiseDb": 93.0,
+      "crowdDensity": 2.01,
+      "lightLevel": 647.0
+    },
+    {
+      "zoneId": "CONC-NORTH",
+      "timestamp": "2026-07-15T13:45:00Z",
+      "noiseDb": 84.0,
+      "crowdDensity": 6.07,
+      "lightLevel": 757.0
+    },
+    {
+      "zoneId": "CONC-SOUTH",
+      "timestamp": "2026-07-15T13:45:00Z",
+      "noiseDb": 78.0,
+      "crowdDensity": 3.45,
+      "lightLevel": 583.0
+    },
+    {
+      "zoneId": "FOOD-1",
+      "timestamp": "2026-07-15T13:45:00Z",
+      "noiseDb": 74.0,
+      "crowdDensity": 2.23,
+      "lightLevel": 400.0
+    },
+    {
+      "zoneId": "REST-1",
+      "timestamp": "2026-07-15T13:45:00Z",
+      "noiseDb": 66.0,
+      "crowdDensity": 3.05,
+      "lightLevel": 209.0
+    },
+    {
+      "zoneId": "SEC-101",
+      "timestamp": "2026-07-15T13:45:00Z",
+      "noiseDb": 113.0,
+      "crowdDensity": 6.59,
+      "lightLevel": 989.0
+    },
+    {
+      "zoneId": "SEC-102",
+      "timestamp": "2026-07-15T13:45:00Z",
+      "noiseDb": 109.0,
+      "crowdDensity": 7.23,
+      "lightLevel": 581.0
+    },
+    {
+      "zoneId": "SEC-103",
+      "timestamp": "2026-07-15T13:45:00Z",
+      "noiseDb": 82.0,
+      "crowdDensity": 4.78,
+      "lightLevel": 717.0
+    },
+    {
+      "zoneId": "SEC-104",
+      "timestamp": "2026-07-15T13:45:00Z",
+      "noiseDb": 116.0,
+      "crowdDensity": 4.46,
+      "lightLevel": 731.0
+    },
+    {
+      "zoneId": "RESET-N",
+      "timestamp": "2026-07-15T13:45:00Z",
+      "noiseDb": 44.0,
+      "crowdDensity": 0.2,
+      "lightLevel": 83.0
+    },
+    {
+      "zoneId": "RESET-S",
+      "timestamp": "2026-07-15T13:45:00Z",
+      "noiseDb": 32.0,
+      "crowdDensity": 0.43,
+      "lightLevel": 115.0
+    },
+    {
+      "zoneId": "GATE-A",
+      "timestamp": "2026-07-15T14:00:00Z",
+      "noiseDb": 110.0,
+      "crowdDensity": 4.13,
+      "lightLevel": 612.0
+    },
+    {
+      "zoneId": "GATE-B",
+      "timestamp": "2026-07-15T14:00:00Z",
+      "noiseDb": 99.0,
+      "crowdDensity": 6.08,
+      "lightLevel": 343.0
+    },
+    {
+      "zoneId": "CONC-NORTH",
+      "timestamp": "2026-07-15T14:00:00Z",
+      "noiseDb": 108.0,
+      "crowdDensity": 7.65,
+      "lightLevel": 732.0
+    },
+    {
+      "zoneId": "CONC-SOUTH",
+      "timestamp": "2026-07-15T14:00:00Z",
+      "noiseDb": 102.0,
+      "crowdDensity": 4.88,
+      "lightLevel": 615.0
+    },
+    {
+      "zoneId": "FOOD-1",
+      "timestamp": "2026-07-15T14:00:00Z",
+      "noiseDb": 89.0,
+      "crowdDensity": 7.76,
+      "lightLevel": 417.0
+    },
+    {
+      "zoneId": "REST-1",
+      "timestamp": "2026-07-15T14:00:00Z",
+      "noiseDb": 82.0,
+      "crowdDensity": 7.65,
+      "lightLevel": 580.0
+    },
+    {
+      "zoneId": "SEC-101",
+      "timestamp": "2026-07-15T14:00:00Z",
+      "noiseDb": 105.0,
+      "crowdDensity": 7.88,
+      "lightLevel": 630.0
+    },
+    {
+      "zoneId": "SEC-102",
+      "timestamp": "2026-07-15T14:00:00Z",
+      "noiseDb": 130.0,
+      "crowdDensity": 5.42,
+      "lightLevel": 683.0
+    },
+    {
+      "zoneId": "SEC-103",
+      "timestamp": "2026-07-15T14:00:00Z",
+      "noiseDb": 130.0,
+      "crowdDensity": 5.94,
+      "lightLevel": 745.0
+    },
+    {
+      "zoneId": "SEC-104",
+      "timestamp": "2026-07-15T14:00:00Z",
+      "noiseDb": 130.0,
+      "crowdDensity": 7.77,
+      "lightLevel": 903.0
+    },
+    {
+      "zoneId": "RESET-N",
+      "timestamp": "2026-07-15T14:00:00Z",
+      "noiseDb": 36.0,
+      "crowdDensity": 0.88,
+      "lightLevel": 133.0
+    },
+    {
+      "zoneId": "RESET-S",
+      "timestamp": "2026-07-15T14:00:00Z",
+      "noiseDb": 38.0,
+      "crowdDensity": 0.29,
+      "lightLevel": 145.0
+    },
+    {
+      "zoneId": "GATE-A",
+      "timestamp": "2026-07-15T14:15:00Z",
+      "noiseDb": 92.0,
+      "crowdDensity": 3.89,
+      "lightLevel": 624.0
+    },
+    {
+      "zoneId": "GATE-B",
+      "timestamp": "2026-07-15T14:15:00Z",
+      "noiseDb": 94.0,
+      "crowdDensity": 5.28,
+      "lightLevel": 660.0
+    },
+    {
+      "zoneId": "CONC-NORTH",
+      "timestamp": "2026-07-15T14:15:00Z",
+      "noiseDb": 97.0,
+      "crowdDensity": 6.96,
+      "lightLevel": 665.0
+    },
+    {
+      "zoneId": "CONC-SOUTH",
+      "timestamp": "2026-07-15T14:15:00Z",
+      "noiseDb": 109.0,
+      "crowdDensity": 6.17,
+      "lightLevel": 484.0
+    },
+    {
+      "zoneId": "FOOD-1",
+      "timestamp": "2026-07-15T14:15:00Z",
+      "noiseDb": 96.0,
+      "crowdDensity": 5.76,
+      "lightLevel": 417.0
+    },
+    {
+      "zoneId": "REST-1",
+      "timestamp": "2026-07-15T14:15:00Z",
+      "noiseDb": 84.0,
+      "crowdDensity": 4.95,
+      "lightLevel": 327.0
+    },
+    {
+      "zoneId": "SEC-101",
+      "timestamp": "2026-07-15T14:15:00Z",
+      "noiseDb": 101.0,
+      "crowdDensity": 7.84,
+      "lightLevel": 666.0
+    },
+    {
+      "zoneId": "SEC-102",
+      "timestamp": "2026-07-15T14:15:00Z",
+      "noiseDb": 99.0,
+      "crowdDensity": 8.75,
+      "lightLevel": 709.0
+    },
+    {
+      "zoneId": "SEC-103",
+      "timestamp": "2026-07-15T14:15:00Z",
+      "noiseDb": 107.0,
+      "crowdDensity": 6.79,
+      "lightLevel": 791.0
+    },
+    {
+      "zoneId": "SEC-104",
+      "timestamp": "2026-07-15T14:15:00Z",
+      "noiseDb": 117.0,
+      "crowdDensity": 6.24,
+      "lightLevel": 858.0
+    },
+    {
+      "zoneId": "RESET-N",
+      "timestamp": "2026-07-15T14:15:00Z",
+      "noiseDb": 33.0,
+      "crowdDensity": 0.72,
+      "lightLevel": 85.0
+    },
+    {
+      "zoneId": "RESET-S",
+      "timestamp": "2026-07-15T14:15:00Z",
+      "noiseDb": 44.0,
+      "crowdDensity": 0.51,
+      "lightLevel": 126.0
+    },
+    {
+      "zoneId": "GATE-A",
+      "timestamp": "2026-07-15T14:30:00Z",
+      "noiseDb": 103.0,
+      "crowdDensity": 3.29,
+      "lightLevel": 548.0
+    },
+    {
+      "zoneId": "GATE-B",
+      "timestamp": "2026-07-15T14:30:00Z",
+      "noiseDb": 76.0,
+      "crowdDensity": 4.82,
+      "lightLevel": 697.0
+    },
+    {
+      "zoneId": "CONC-NORTH",
+      "timestamp": "2026-07-15T14:30:00Z",
+      "noiseDb": 113.0,
+      "crowdDensity": 8.06,
+      "lightLevel": 577.0
+    },
+    {
+      "zoneId": "CONC-SOUTH",
+      "timestamp": "2026-07-15T14:30:00Z",
+      "noiseDb": 99.0,
+      "crowdDensity": 5.63,
+      "lightLevel": 804.0
+    },
+    {
+      "zoneId": "FOOD-1",
+      "timestamp": "2026-07-15T14:30:00Z",
+      "noiseDb": 99.0,
+      "crowdDensity": 6.53,
+      "lightLevel": 460.0
+    },
+    {
+      "zoneId": "REST-1",
+      "timestamp": "2026-07-15T14:30:00Z",
+      "noiseDb": 92.0,
+      "crowdDensity": 4.02,
+      "lightLevel": 542.0
+    },
+    {
+      "zoneId": "SEC-101",
+      "timestamp": "2026-07-15T14:30:00Z",
+      "noiseDb": 124.0,
+      "crowdDensity": 5.95,
+      "lightLevel": 716.0
+    },
+    {
+      "zoneId": "SEC-102",
+      "timestamp": "2026-07-15T14:30:00Z",
+      "noiseDb": 98.0,
+      "crowdDensity": 9.11,
+      "lightLevel": 803.0
+    },
+    {
+      "zoneId": "SEC-103",
+      "timestamp": "2026-07-15T14:30:00Z",
+      "noiseDb": 125.0,
+      "crowdDensity": 6.01,
+      "lightLevel": 532.0
+    },
+    {
+      "zoneId": "SEC-104",
+      "timestamp": "2026-07-15T14:30:00Z",
+      "noiseDb": 130.0,
+      "crowdDensity": 5.91,
+      "lightLevel": 871.0
+    },
+    {
+      "zoneId": "RESET-N",
+      "timestamp": "2026-07-15T14:30:00Z",
+      "noiseDb": 31.0,
+      "crowdDensity": 0.45,
+      "lightLevel": 61.0
+    },
+    {
+      "zoneId": "RESET-S",
+      "timestamp": "2026-07-15T14:30:00Z",
+      "noiseDb": 43.0,
+      "crowdDensity": 0.3,
+      "lightLevel": 128.0
+    },
+    {
+      "zoneId": "GATE-A",
+      "timestamp": "2026-07-15T14:45:00Z",
+      "noiseDb": 91.0,
+      "crowdDensity": 6.21,
+      "lightLevel": 618.0
+    },
+    {
+      "zoneId": "GATE-B",
+      "timestamp": "2026-07-15T14:45:00Z",
+      "noiseDb": 100.0,
+      "crowdDensity": 5.61,
+      "lightLevel": 646.0
+    },
+    {
+      "zoneId": "CONC-NORTH",
+      "timestamp": "2026-07-15T14:45:00Z",
+      "noiseDb": 95.0,
+      "crowdDensity": 7.52,
+      "lightLevel": 555.0
+    },
+    {
+      "zoneId": "CONC-SOUTH",
+      "timestamp": "2026-07-15T14:45:00Z",
+      "noiseDb": 89.0,
+      "crowdDensity": 4.18,
+      "lightLevel": 854.0
+    },
+    {
+      "zoneId": "FOOD-1",
+      "timestamp": "2026-07-15T14:45:00Z",
+      "noiseDb": 95.0,
+      "crowdDensity": 4.34,
+      "lightLevel": 293.0
+    },
+    {
+      "zoneId": "REST-1",
+      "timestamp": "2026-07-15T14:45:00Z",
+      "noiseDb": 103.0,
+      "crowdDensity": 5.38,
+      "lightLevel": 508.0
+    },
+    {
+      "zoneId": "SEC-101",
+      "timestamp": "2026-07-15T14:45:00Z",
+      "noiseDb": 101.0,
+      "crowdDensity": 7.79,
+      "lightLevel": 891.0
+    },
+    {
+      "zoneId": "SEC-102",
+      "timestamp": "2026-07-15T14:45:00Z",
+      "noiseDb": 128.0,
+      "crowdDensity": 7.21,
+      "lightLevel": 841.0
+    },
+    {
+      "zoneId": "SEC-103",
+      "timestamp": "2026-07-15T14:45:00Z",
+      "noiseDb": 104.0,
+      "crowdDensity": 6.75,
+      "lightLevel": 552.0
+    },
+    {
+      "zoneId": "SEC-104",
+      "timestamp": "2026-07-15T14:45:00Z",
+      "noiseDb": 112.0,
+      "crowdDensity": 7.91,
+      "lightLevel": 781.0
+    },
+    {
+      "zoneId": "RESET-N",
+      "timestamp": "2026-07-15T14:45:00Z",
+      "noiseDb": 38.0,
+      "crowdDensity": 0.41,
+      "lightLevel": 90.0
+    },
+    {
+      "zoneId": "RESET-S",
+      "timestamp": "2026-07-15T14:45:00Z",
+      "noiseDb": 33.0,
+      "crowdDensity": 0.2,
+      "lightLevel": 142.0
+    },
+    {
+      "zoneId": "GATE-A",
+      "timestamp": "2026-07-15T15:00:00Z",
+      "noiseDb": 79.0,
+      "crowdDensity": 4.85,
+      "lightLevel": 399.0
+    },
+    {
+      "zoneId": "GATE-B",
+      "timestamp": "2026-07-15T15:00:00Z",
+      "noiseDb": 102.0,
+      "crowdDensity": 4.57,
+      "lightLevel": 463.0
+    },
+    {
+      "zoneId": "CONC-NORTH",
+      "timestamp": "2026-07-15T15:00:00Z",
+      "noiseDb": 110.0,
+      "crowdDensity": 4.93,
+      "lightLevel": 804.0
+    },
+    {
+      "zoneId": "CONC-SOUTH",
+      "timestamp": "2026-07-15T15:00:00Z",
+      "noiseDb": 92.0,
+      "crowdDensity": 7.45,
+      "lightLevel": 839.0
+    },
+    {
+      "zoneId": "FOOD-1",
+      "timestamp": "2026-07-15T15:00:00Z",
+      "noiseDb": 86.0,
+      "crowdDensity": 5.72,
+      "lightLevel": 255.0
+    },
+    {
+      "zoneId": "REST-1",
+      "timestamp": "2026-07-15T15:00:00Z",
+      "noiseDb": 91.0,
+      "crowdDensity": 6.56,
+      "lightLevel": 208.0
+    },
+    {
+      "zoneId": "SEC-101",
+      "timestamp": "2026-07-15T15:00:00Z",
+      "noiseDb": 130.0,
+      "crowdDensity": 8.03,
+      "lightLevel": 631.0
+    },
+    {
+      "zoneId": "SEC-102",
+      "timestamp": "2026-07-15T15:00:00Z",
+      "noiseDb": 120.0,
+      "crowdDensity": 8.38,
+      "lightLevel": 932.0
+    },
+    {
+      "zoneId": "SEC-103",
+      "timestamp": "2026-07-15T15:00:00Z",
+      "noiseDb": 110.0,
+      "crowdDensity": 7.32,
+      "lightLevel": 931.0
+    },
+    {
+      "zoneId": "SEC-104",
+      "timestamp": "2026-07-15T15:00:00Z",
+      "noiseDb": 126.0,
+      "crowdDensity": 9.87,
+      "lightLevel": 997.0
+    },
+    {
+      "zoneId": "RESET-N",
+      "timestamp": "2026-07-15T15:00:00Z",
+      "noiseDb": 35.0,
+      "crowdDensity": 0.89,
+      "lightLevel": 69.0
+    },
+    {
+      "zoneId": "RESET-S",
+      "timestamp": "2026-07-15T15:00:00Z",
+      "noiseDb": 32.0,
+      "crowdDensity": 0.56,
+      "lightLevel": 140.0
+    }
+  ]
+}

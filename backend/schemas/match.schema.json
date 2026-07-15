@@ -1,0 +1,14 @@
+{
+  "$id": "https://example.com/schemas/match.schema.json",
+  "title": "Match",
+  "type": "object",
+  "required": ["matchId", "venueId", "kickoffTime", "gatesOpenTime", "expectedAttendance"],
+  "properties": {
+    "matchId": { "type": "string", "pattern": "^[A-Z0-9_-]+$" },
+    "venueId": { "type": "string", "pattern": "^[A-Z0-9_-]+$" },
+    "kickoffTime": { "type": "string", "format": "date-time" },
+    "gatesOpenTime": { "type": "string", "format": "date-time" },
+    "expectedAttendance": { "type": "integer", "minimum": 0 }
+  },
+  "additionalProperties": false
+}

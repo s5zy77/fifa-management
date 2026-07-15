@@ -1,0 +1,31 @@
+{
+  "$id": "https://example.com/schemas/zone.schema.json",
+  "title": "Zone",
+  "type": "object",
+  "required": ["zoneId", "type", "name", "coordinates", "capacitySqm", "adjacentZones", "walkTimeSeconds"],
+  "properties": {
+    "zoneId": { "type": "string", "pattern": "^[A-Z0-9_-]+$" },
+    "type": { "type": "string", "enum": ["gate", "concourse", "seating", "restroom", "foodcourt", "reset"] },
+    "name": { "type": "string", "minLength": 1 },
+    "coordinates": {
+      "type": "object",
+      "required": ["x", "y"],
+      "properties": {
+        "x": { "type": "number" },
+        "y": { "type": "number" }
+      }
+    },
+    "capacitySqm": { "type": "number", "minimum": 0 },
+    "adjacentZones": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[A-Z0-9_-]+$" },
+      "description": "Neighbouring zone IDs for graph traversal"
+    },
+    "walkTimeSeconds": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Estimated walking time from this zone to any adjacent zone (average)"
+    }
+  },
+  "additionalProperties": false
+}

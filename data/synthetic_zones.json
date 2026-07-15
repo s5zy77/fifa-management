@@ -1,0 +1,178 @@
+[
+  {
+    "zoneId": "GATE-A",
+    "type": "gate",
+    "name": "North Gate A",
+    "coordinates": {
+      "x": 0.0,
+      "y": 100.0
+    },
+    "capacitySqm": 1000,
+    "adjacentZones": [
+      "CONC-NORTH"
+    ],
+    "walkTimeSeconds": 120
+  },
+  {
+    "zoneId": "GATE-B",
+    "type": "gate",
+    "name": "South Gate B",
+    "coordinates": {
+      "x": 0.0,
+      "y": -100.0
+    },
+    "capacitySqm": 1000,
+    "adjacentZones": [
+      "CONC-SOUTH"
+    ],
+    "walkTimeSeconds": 120
+  },
+  {
+    "zoneId": "CONC-NORTH",
+    "type": "concourse",
+    "name": "North Concourse",
+    "coordinates": {
+      "x": 0.0,
+      "y": 50.0
+    },
+    "capacitySqm": 5000,
+    "adjacentZones": [
+      "GATE-A",
+      "FOOD-1",
+      "SEC-101",
+      "SEC-102",
+      "RESET-N"
+    ],
+    "walkTimeSeconds": 60
+  },
+  {
+    "zoneId": "CONC-SOUTH",
+    "type": "concourse",
+    "name": "South Concourse",
+    "coordinates": {
+      "x": 0.0,
+      "y": -50.0
+    },
+    "capacitySqm": 5000,
+    "adjacentZones": [
+      "GATE-B",
+      "REST-1",
+      "SEC-103",
+      "SEC-104",
+      "RESET-S"
+    ],
+    "walkTimeSeconds": 60
+  },
+  {
+    "zoneId": "FOOD-1",
+    "type": "foodcourt",
+    "name": "North Food Court",
+    "coordinates": {
+      "x": -30.0,
+      "y": 50.0
+    },
+    "capacitySqm": 500,
+    "adjacentZones": [
+      "CONC-NORTH"
+    ],
+    "walkTimeSeconds": 30
+  },
+  {
+    "zoneId": "REST-1",
+    "type": "restroom",
+    "name": "South Restrooms",
+    "coordinates": {
+      "x": 30.0,
+      "y": -50.0
+    },
+    "capacitySqm": 200,
+    "adjacentZones": [
+      "CONC-SOUTH"
+    ],
+    "walkTimeSeconds": 30
+  },
+  {
+    "zoneId": "SEC-101",
+    "type": "seating",
+    "name": "Section 101",
+    "coordinates": {
+      "x": -20.0,
+      "y": 20.0
+    },
+    "capacitySqm": 800,
+    "adjacentZones": [
+      "CONC-NORTH"
+    ],
+    "walkTimeSeconds": 45
+  },
+  {
+    "zoneId": "SEC-102",
+    "type": "seating",
+    "name": "Section 102",
+    "coordinates": {
+      "x": 20.0,
+      "y": 20.0
+    },
+    "capacitySqm": 800,
+    "adjacentZones": [
+      "CONC-NORTH"
+    ],
+    "walkTimeSeconds": 45
+  },
+  {
+    "zoneId": "SEC-103",
+    "type": "seating",
+    "name": "Section 103",
+    "coordinates": {
+      "x": -20.0,
+      "y": -20.0
+    },
+    "capacitySqm": 800,
+    "adjacentZones": [
+      "CONC-SOUTH"
+    ],
+    "walkTimeSeconds": 45
+  },
+  {
+    "zoneId": "SEC-104",
+    "type": "seating",
+    "name": "Section 104",
+    "coordinates": {
+      "x": 20.0,
+      "y": -20.0
+    },
+    "capacitySqm": 800,
+    "adjacentZones": [
+      "CONC-SOUTH"
+    ],
+    "walkTimeSeconds": 45
+  },
+  {
+    "zoneId": "RESET-N",
+    "type": "reset",
+    "name": "North Sensory Room",
+    "coordinates": {
+      "x": 40.0,
+      "y": 60.0
+    },
+    "capacitySqm": 100,
+    "adjacentZones": [
+      "CONC-NORTH"
+    ],
+    "walkTimeSeconds": 20
+  },
+  {
+    "zoneId": "RESET-S",
+    "type": "reset",
+    "name": "South Sensory Room",
+    "coordinates": {
+      "x": -40.0,
+      "y": -60.0
+    },
+    "capacitySqm": 100,
+    "adjacentZones": [
+      "CONC-SOUTH"
+    ],
+    "walkTimeSeconds": 20
+  }
+]

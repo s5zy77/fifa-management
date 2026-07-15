@@ -1,0 +1,28 @@
+{
+  "$id": "https://example.com/schemas/profile.schema.json",
+  "title": "SensoryProfile",
+  "type": "object",
+  "required": ["id", "sensitivity", "preferredLanguage"],
+  "properties": {
+    "id": { "type": "string", "format": "uuid" },
+    "sensitivity": {
+      "type": "object",
+      "required": ["noise", "light", "crowd", "movement", "quietExit", "serviceAnimal"],
+      "properties": {
+        "noise":   { "type": "integer", "minimum": 0, "maximum": 10, "description": "0 = tolerant, 10 = extremely sensitive" },
+        "light":   { "type": "integer", "minimum": 0, "maximum": 10 },
+        "crowd":   { "type": "integer", "minimum": 0, "maximum": 10 },
+        "movement":{ "type": "integer", "minimum": 0, "maximum": 10, "description": "Unpredictable motion / flashing" },
+        "quietExit": { "type": "boolean", "description": "Needs a low-stimulus egress path" },
+        "serviceAnimal": { "type": "boolean", "description": "Travels with a support animal" }
+      },
+      "additionalProperties": false
+    },
+    "preferredLanguage": {
+      "type": "string",
+      "enum": ["en", "es", "fr", "pt", "ar"],
+      "description": "5 major World Cup 2026 demographics: English, Spanish, French, Portuguese, Arabic"
+    }
+  },
+  "additionalProperties": false
+}
