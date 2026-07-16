@@ -147,3 +147,20 @@ def find_quiet_zone(req: QuietZoneRequest, session: Session = Depends(get_sessio
         return {"quietZone": result, "source": "GenAI"}
     except Exception as e:
         raise HTTPException(status_code=503, detail="LLM API temporarily unavailable.")
+
+@router.get("/live-signals")
+def get_live_signals(dataset: DatasetStore = Depends(get_dataset)):
+    # Return all current signals and zones for the frontend to render the map
+    # and evaluate real-time spikes organically.
+    current_signals = {}
+    for z in dataset.zones:
+        sig = dataset.get_current_signal(z.get("zoneId"))
+        if sig:
+            current_signals[z.get("zoneId")] = sig
+            
+    return {
+        "match": dataset.match,
+        "zones": dataset.zones,
+        "liveSignals": current_signals
+    }
+
