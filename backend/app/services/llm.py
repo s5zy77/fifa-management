@@ -18,19 +18,28 @@ class LLMService:
         self.model = "gpt-4-turbo"
 
     def generate_json_completion(self, system_prompt: str, user_prompt: str) -> dict:
-        try:
-            response = self.client.chat.completions.create(
-                model=self.model,
-                messages=[
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": user_prompt}
-                ],
-                temperature=self.temperature,
-                response_format={"type": "json_object"}
-            )
-            return json.loads(response.choices[0].message.content)
-        except Exception as e:
-            # Re-raise to allow the endpoint to handle it as graceful degradation
-            raise Exception(f"LLM API Call failed: {str(e)}")
+        for attempt in range(2):
+            try:
+                response = self.client.chat.completions.create(
+                    model=self.model,
+                    messages=[
+                        {"role": "system", "content": system_prompt},
+                        {"role": "user", "content": user_prompt}
+                    ],
+                    temperature=self.temperature,
+                    response_format={"type": "json_object"}
+                )
+                content = response.choices[0].message.content
+                return json.loads(content)
+            except json.JSONDecodeError as e:
+                if attempt == 0:
+                    # Retry once with a stricter reminder
+                    system_prompt += " ERROR: Your previous response was not valid JSON. You MUST return ONLY valid JSON."
+                    continue
+                else:
+                    raise Exception(f"LLM API Call failed: Malformed JSON after retry: {str(e)}")
+            except Exception as e:
+                # Catch-all for API timeouts or other errors, immediately fail for degradation
+                raise Exception(f"LLM API Call failed: {str(e)}")
 
 llm_service = LLMService()

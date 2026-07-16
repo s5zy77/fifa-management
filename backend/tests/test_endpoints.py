@@ -83,6 +83,18 @@ def test_graceful_degradation_plan(client_fixture, monkeypatch):
     assert res.status_code == 503
     assert "LLM API temporarily unavailable" in res.json()["detail"]
 
+def test_graceful_degradation_malformed_json(client_fixture, monkeypatch):
+    client, profile_id = client_fixture
+    
+    def mock_completion_fail(sys_prompt, user_prompt):
+        raise Exception("Malformed JSON after retry")
+        
+    monkeypatch.setattr(llm_service, "generate_json_completion", mock_completion_fail)
+    
+    res = client.post("/api/plan", json={"profileId": profile_id, "seatSection": "SEC-1"})
+    assert res.status_code == 503
+    assert "LLM API temporarily unavailable" in res.json()["detail"]
+
 def test_reroute_endpoint(client_fixture, monkeypatch):
     client, profile_id = client_fixture
     
