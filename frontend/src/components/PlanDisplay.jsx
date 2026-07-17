@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 
-export const PlanDisplay = ({ plan, onFeedback, onShare }) => {
+export const PlanDisplay = ({ plan, onFeedback, onShare, t }) => {
   const [feedbackGiven, setFeedbackGiven] = useState(false);
   const [toastMsg, setToastMsg] = useState('');
 
   if (!plan) {
     return (
       <section className="card" aria-labelledby="plan-heading">
-        <span className="eyebrow">Step 2</span>
-        <h2 id="plan-heading">Your visit plan</h2>
-        <div className="plan-empty">Set your profile and generate a plan to see your personalized route.</div>
+        <span className="eyebrow">{t('step2')}</span>
+        <h2 id="plan-heading">{t('plan_heading')}</h2>
+        <div className="plan-empty">{t('plan_empty')}</div>
       </section>
     );
   }
@@ -30,7 +30,6 @@ export const PlanDisplay = ({ plan, onFeedback, onShare }) => {
   };
 
   const handleDownload = () => {
-    // Basic canvas rendering for plan card (from prototype)
     const canvas = document.createElement('canvas');
     canvas.width = 640; canvas.height = 420;
     const ctx = canvas.getContext('2d');
@@ -48,13 +47,13 @@ export const PlanDisplay = ({ plan, onFeedback, onShare }) => {
     ctx.fillStyle = '#0F172A'; ctx.font = '700 24px Outfit, sans-serif';
     ctx.fillText('CalmGate — Your Visit Plan', 98, 60);
     ctx.fillStyle = '#475569'; ctx.font = '400 13px Inter, sans-serif';
-    ctx.fillText('Sensory-friendly stadium companion', 98, 78);
+    ctx.fillText(t('companion'), 98, 78);
 
     let y = 130;
     const rows = [
-      ['Recommended gate', plan.plan.recommendedGate],
-      ['Best arrival window', plan.plan.bestArrivalWindow],
-      ['Nearest reset zone', plan.plan.nearestResetZone],
+      [t('rec_gate'), plan.plan.recommendedGate],
+      [t('arrival_window'), plan.plan.bestArrivalWindow],
+      [t('reset_zone'), plan.plan.nearestResetZone],
     ];
     rows.forEach(([label, val]) => {
       ctx.fillStyle = '#0F766E'; ctx.font = '600 12px Inter, sans-serif';
@@ -72,52 +71,52 @@ export const PlanDisplay = ({ plan, onFeedback, onShare }) => {
 
   return (
     <section className="card" aria-labelledby="plan-heading">
-      <span className="eyebrow">Step 2</span>
-      <h2 id="plan-heading">Your visit plan</h2>
+      <span className="eyebrow">{t('step2')}</span>
+      <h2 id="plan-heading">{t('plan_heading')}</h2>
       
       <div>
         <div className="plan-row">
           <div className="plan-icon">🚪</div>
           <div>
-            <h3>Recommended gate</h3>
+            <h3>{t('rec_gate')}</h3>
             <p>{plan.plan.recommendedGate}</p>
           </div>
         </div>
         <div className="plan-row">
           <div className="plan-icon">🕒</div>
           <div>
-            <h3>Best arrival window</h3>
+            <h3>{t('arrival_window')}</h3>
             <p>{plan.plan.bestArrivalWindow}</p>
           </div>
         </div>
         <div className="plan-row">
           <div className="plan-icon">🌿</div>
           <div>
-            <h3>Nearest reset zone</h3>
+            <h3>{t('reset_zone')}</h3>
             <p>{plan.plan.nearestResetZone}</p>
           </div>
         </div>
         <div className="reasoning-box">
-          <strong>Why this plan:</strong> {plan.plan.explanation}
+          <strong>{t('why_plan')}:</strong> {plan.plan.explanation}
         </div>
 
         <div className="feedback-block">
           {!feedbackGiven ? (
             <>
-              <p>Was this route calm for you?</p>
+              <p>{t('route_calm')}</p>
               <div className="feedback-btns">
                 <button className="feedback-btn" onClick={() => handleFeedback('up')} aria-label="Yes, this route was calm">👍</button>
                 <button className="feedback-btn" onClick={() => handleFeedback('down')} aria-label="No, this route was overwhelming">👎</button>
               </div>
             </>
           ) : (
-            <span className="feedback-thanks" style={{ display: 'inline' }}>Thanks — we'll factor this into future plans.</span>
+            <span className="feedback-thanks" style={{ display: 'inline' }}>{t('thanks')}</span>
           )}
         </div>
 
         <div className="share-row">
-          <button className="btn-secondary" onClick={handleDownload}>⬇ Save plan card</button>
-          <button className="btn-secondary" onClick={handleShare}>🔗 Copy shareable link</button>
+          <button className="btn-secondary" onClick={handleDownload}>{t('save_card')}</button>
+          <button className="btn-secondary" onClick={handleShare}>{t('copy_link')}</button>
         </div>
       </div>
       

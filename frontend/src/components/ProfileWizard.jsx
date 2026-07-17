@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export const ProfileWizard = ({ onGeneratePlan, isGenerating }) => {
+export const ProfileWizard = ({ onGeneratePlan, isGenerating, t }) => {
   const [profile, setProfile] = useState({
     noise: 4,
     light: 5,
@@ -27,14 +27,14 @@ export const ProfileWizard = ({ onGeneratePlan, isGenerating }) => {
 
   return (
     <section className="card" aria-labelledby="profile-heading">
-      <span className="eyebrow">Step 1</span>
-      <h2 id="profile-heading">Your sensory profile</h2>
-      <p className="sub">Tell us what affects you — this shapes every recommendation.</p>
+      <span className="eyebrow">{t('step1')}</span>
+      <h2 id="profile-heading">{t('profile_heading')}</h2>
+      <p className="sub">{t('profile_sub')}</p>
 
       {/* Primary Profile Sliders */}
       <div className="field">
         <div className="field-label">
-          <label htmlFor="noise">Noise sensitivity</label>
+          <label htmlFor="noise">{t('noise')}</label>
           <span className="field-value">{profile.noise}</span>
         </div>
         <input 
@@ -45,7 +45,7 @@ export const ProfileWizard = ({ onGeneratePlan, isGenerating }) => {
       </div>
       <div className="field">
         <div className="field-label">
-          <label htmlFor="light">Light sensitivity</label>
+          <label htmlFor="light">{t('light')}</label>
           <span className="field-value">{profile.light}</span>
         </div>
         <input 
@@ -56,7 +56,7 @@ export const ProfileWizard = ({ onGeneratePlan, isGenerating }) => {
       </div>
       <div className="field">
         <div className="field-label">
-          <label htmlFor="crowd">Crowd proximity</label>
+          <label htmlFor="crowd">{t('crowd')}</label>
           <span className="field-value">{profile.crowd}</span>
         </div>
         <input 
@@ -67,7 +67,7 @@ export const ProfileWizard = ({ onGeneratePlan, isGenerating }) => {
       </div>
       <div className="field">
         <div className="field-label">
-          <label htmlFor="movement">Unpredictable movement</label>
+          <label htmlFor="movement">{t('movement')}</label>
           <span className="field-value">{profile.movement}</span>
         </div>
         <input 
@@ -75,12 +75,12 @@ export const ProfileWizard = ({ onGeneratePlan, isGenerating }) => {
           value={profile.movement} 
           onChange={(e) => setProfile(p => ({...p, movement: +e.target.value}))} 
         />
-        <p className="field-hint">Sudden motion, flashing screens, crowd surges</p>
+        <p className="field-hint">{t('movement_hint')}</p>
       </div>
 
       {/* Toggles */}
       <div className="toggle-row">
-        <label htmlFor="quietExit">I need a quiet exit route</label>
+        <label htmlFor="quietExit">{t('quiet_exit')}</label>
         <div className="switch">
           <input 
             type="checkbox" id="quietExit" 
@@ -91,7 +91,7 @@ export const ProfileWizard = ({ onGeneratePlan, isGenerating }) => {
         </div>
       </div>
       <div className="toggle-row">
-        <label htmlFor="serviceAnimal">Travelling with a service animal</label>
+        <label htmlFor="serviceAnimal">{t('service_animal')}</label>
         <div className="switch">
           <input 
             type="checkbox" id="serviceAnimal" 
@@ -104,7 +104,7 @@ export const ProfileWizard = ({ onGeneratePlan, isGenerating }) => {
 
       {/* Companion Mode */}
       <div className="companion-toggle-row">
-        <label htmlFor="companionMode">Plan for a companion too</label>
+        <label htmlFor="companionMode">{t('companion_mode')}</label>
         <div className="switch">
           <input 
             type="checkbox" id="companionMode" 
@@ -116,16 +116,16 @@ export const ProfileWizard = ({ onGeneratePlan, isGenerating }) => {
       </div>
 
       <div className={`companion-panel ${companionOn ? 'open' : ''}`}>
-        <h4>Companion's sensory profile</h4>
+        <h4>{t('companion_heading')}</h4>
         <input 
           type="text" 
-          placeholder="Companion's name (optional)" 
+          placeholder={t('companion_name')} 
           value={companion.name}
           onChange={e => setCompanion(c => ({...c, name: e.target.value}))}
         />
         <div className="field">
           <div className="field-label">
-            <label htmlFor="cNoise">Noise sensitivity</label>
+            <label htmlFor="cNoise">{t('c_noise')}</label>
             <span className="field-value">{companion.noise}</span>
           </div>
           <input 
@@ -136,7 +136,7 @@ export const ProfileWizard = ({ onGeneratePlan, isGenerating }) => {
         </div>
         <div className="field">
           <div className="field-label">
-            <label htmlFor="cCrowd">Crowd proximity</label>
+            <label htmlFor="cCrowd">{t('c_crowd')}</label>
             <span className="field-value">{companion.crowd}</span>
           </div>
           <input 
@@ -147,7 +147,7 @@ export const ProfileWizard = ({ onGeneratePlan, isGenerating }) => {
         </div>
         <div className="field" style={{ marginBottom: 0 }}>
           <div className="field-label">
-            <label htmlFor="cMobility">Mobility / access needs</label>
+            <label htmlFor="cMobility">{t('c_mobility')}</label>
             <span className="field-value">{companion.mobility}</span>
           </div>
           <input 
@@ -159,7 +159,7 @@ export const ProfileWizard = ({ onGeneratePlan, isGenerating }) => {
       </div>
 
       <button className="btn-primary" onClick={handleSubmit} disabled={isGenerating}>
-        {isGenerating ? "Generating..." : "Generate my plan →"}
+        {isGenerating ? t('generating') : t('generate_plan')}
       </button>
     </section>
   );

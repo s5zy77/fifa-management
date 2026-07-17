@@ -1,5 +1,11 @@
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
+import os
+from dotenv import load_dotenv
+
+# Load environment variables FIRST, before importing routes/services
+load_dotenv()
+
 from .database import create_db_and_tables
 from .routes import profile
 from .routes import plan

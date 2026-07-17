@@ -1,9 +1,7 @@
 import React from 'react';
 
-export const LoadMeter = ({ zoneName, loadScore }) => {
-  // loadScore is out of 100
+export const LoadMeter = ({ zoneName, loadScore, t }) => {
   const normalized = Math.min(Math.max(loadScore, 0), 100);
-  // Dasharray is 289, so offset goes from 289 to 0
   const dashOffset = 289 - (normalized / 100) * 289;
   
   const getStrokeColor = (val) => {
@@ -14,8 +12,8 @@ export const LoadMeter = ({ zoneName, loadScore }) => {
 
   return (
     <section className="card">
-      <span className="eyebrow">Live</span>
-      <h2>Current zone load</h2>
+      <span className="eyebrow">{t('live')}</span>
+      <h2>{t('current_load')}</h2>
       <div className="meter-wrap">
         <svg className="meter-svg" width="110" height="110" viewBox="0 0 110 110">
           <circle cx="55" cy="55" r="46" fill="none" stroke="#E2E8F0" strokeWidth="10"/>
@@ -34,14 +32,14 @@ export const LoadMeter = ({ zoneName, loadScore }) => {
         </svg>
         <div className="meter-legend">
           <div className="val">{normalized}<span style={{ fontSize: '13px' }}>%</span></div>
-          <div>{zoneName} sensory load</div>
+          <div>{zoneName} {t('load_suffix')}</div>
         </div>
       </div>
       <div className="legend-dots">
-        <div className="legend-dot"><span className="dot" style={{ background: 'var(--brand)' }}></span> Calm</div>
-        <div className="legend-dot"><span className="dot" style={{ background: 'var(--amber-fill)' }}></span> Building up</div>
-        <div className="legend-dot"><span className="dot" style={{ background: 'var(--rose)' }}></span> Overstimulating</div>
-        <div className="legend-dot"><span className="dot" style={{ background: 'var(--sky)' }}></span> Reset zone</div>
+        <div className="legend-dot"><span className="dot" style={{ background: 'var(--brand)' }}></span> {t('calm')}</div>
+        <div className="legend-dot"><span className="dot" style={{ background: 'var(--amber-fill)' }}></span> {t('building')}</div>
+        <div className="legend-dot"><span className="dot" style={{ background: 'var(--rose)' }}></span> {t('overstimulating')}</div>
+        <div className="legend-dot"><span className="dot" style={{ background: 'var(--sky)' }}></span> {t('reset_legend')}</div>
       </div>
     </section>
   );

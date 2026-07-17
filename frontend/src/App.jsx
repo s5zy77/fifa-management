@@ -5,16 +5,23 @@ import { PlanDisplay } from './components/PlanDisplay';
 import { StadiumMap } from './components/StadiumMap';
 import { LoadMeter } from './components/LoadMeter';
 import { AuthOverlay } from './components/AuthOverlay';
+import { translations } from './utils/translations';
 
 export const App = () => {
   const [theme, setTheme] = useState(localStorage.getItem('calmgate_theme') || 'light');
+  const [lang, setLang] = useState(localStorage.getItem('calmgate_lang') || 'en');
   const [authVisible, setAuthVisible] = useState(!localStorage.getItem('calmgate_token') && !localStorage.getItem('calmgate_guest'));
   const [userId, setUserId] = useState(localStorage.getItem('calmgate_user_id'));
   const [profileId, setProfileId] = useState(localStorage.getItem('calmgate_profile_id'));
   const [liveData, setLiveData] = useState({ zones: [], liveSignals: {} });
   const [plan, setPlan] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
-  const [toastMsg, setToastMsg] = useState('');
+
+  // Translation helper function
+  const t = (key) => {
+    const dict = translations[lang] || translations['en'];
+    return dict[key] || translations['en'][key] || key;
+  };
 
   // Handle Theme
   useEffect(() => {
@@ -25,6 +32,11 @@ export const App = () => {
     }
     localStorage.setItem('calmgate_theme', theme);
   }, [theme]);
+
+  // Handle Language
+  useEffect(() => {
+    localStorage.setItem('calmgate_lang', lang);
+  }, [lang]);
 
   // Handle live signals polling
   useEffect(() => {
@@ -55,23 +67,23 @@ export const App = () => {
   const handleGeneratePlan = async (profileData) => {
     setIsGenerating(true);
     try {
-      let pId = profileId;
-      if (!pId) {
-        const res = await api.createProfile({
-          preferredLanguage: "en",
-          sensitivity: {
-            noise: profileData.noise,
-            light: profileData.light,
-            crowd: profileData.crowd,
-            movement: profileData.movement,
-            quietExit: profileData.quietExit,
-            serviceAnimal: profileData.serviceAnimal
-          }
-        });
-        pId = res.id;
-        setProfileId(pId);
-        localStorage.setItem('calmgate_profile_id', pId);
-      }
+      // Force recreation of profile if language has changed, so AI reasons in correct language
+      let pId = null;
+      
+      const res = await api.createProfile({
+        preferredLanguage: lang,
+        sensitivity: {
+          noise: profileData.noise,
+          light: profileData.light,
+          crowd: profileData.crowd,
+          movement: profileData.movement,
+          quietExit: profileData.quietExit,
+          serviceAnimal: profileData.serviceAnimal
+        }
+      });
+      pId = res.id;
+      setProfileId(pId);
+      localStorage.setItem('calmgate_profile_id', pId);
 
       const planRes = await api.generatePlan(
         pId, 
@@ -120,7 +132,7 @@ export const App = () => {
       const z = liveData.zones.find(z => z.zoneId === plan.plan.recommendedGate);
       return z;
     }
-    return liveData.zones[0]; // fallback
+    return liveData.zones[0];
   };
 
   const meterZone = getMeterZone();
@@ -137,7 +149,7 @@ export const App = () => {
           <div className="brand-mark">C</div>
           <div className="brand-text">
             <h1>CalmGate</h1>
-            <p>Your sensory-friendly stadium companion</p>
+            <p>{t('companion')}</p>
           </div>
         </div>
         <div className="top-controls">
@@ -149,19 +161,26 @@ export const App = () => {
             <option value="light">Light Mode</option>
             <option value="dark">Dark Mode</option>
           </select>
-          <select>
+          <select 
+            value={lang} 
+            onChange={(e) => setLang(e.target.value)}
+            aria-label="Language Selector"
+          >
             <option value="en">English</option>
             <option value="es">Español</option>
+            <option value="fr">Français</option>
+            <option value="ar">العربية</option>
+            <option value="hi">हिन्दी</option>
           </select>
         </div>
       </header>
 
       <main>
         <div className="stack">
-          <ProfileWizard onGeneratePlan={handleGeneratePlan} isGenerating={isGenerating} />
-          <PlanDisplay plan={plan} onFeedback={handleFeedback} onShare={handleShare} />
+          <ProfileWizard onGeneratePlan={handleGeneratePlan} isGenerating={isGenerating} t={t} />
+          <PlanDisplay plan={plan} onFeedback={handleFeedback} onShare={handleShare} t={t} />
           {meterZone && (
-            <LoadMeter zoneName={meterZone.name} loadScore={meterLoad} />
+            <LoadMeter zoneName={meterZone.name} loadScore={meterLoad} t={t} />
           )}
         </div>
         
@@ -172,6 +191,7 @@ export const App = () => {
             recommendedGate={plan?.plan?.recommendedGate}
             recommendedSection="SEC_101"
             recommendedReset={plan?.plan?.nearestResetZone}
+            t={t}
           />
         </div>
       </main>

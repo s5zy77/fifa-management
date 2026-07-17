@@ -19,7 +19,9 @@ class LLMService:
         # We don't want the AI to invent wild new routes randomly if the 
         # sensory conditions haven't changed.
         self.temperature = 0.2
-        self.model = "gpt-4-turbo"
+        self.model = os.getenv("OPENAI_MODEL_NAME", "gpt-4-turbo")
+        
+        print(f"LLM configured: model={self.model}, base_url={self.client.base_url}")
 
     def generate_json_completion(self, system_prompt: str, user_prompt: str) -> dict:
         for attempt in range(2):
@@ -44,6 +46,7 @@ class LLMService:
                     raise Exception(f"LLM API Call failed: Malformed JSON after retry: {str(e)}")
             except Exception as e:
                 # Catch-all for API timeouts or other errors, immediately fail for degradation
+                print(f"LLM API Call Exception: {str(e)}")
                 raise Exception(f"LLM API Call failed: {str(e)}")
 
 llm_service = LLMService()
