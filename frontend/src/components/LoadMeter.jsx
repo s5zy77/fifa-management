@@ -1,28 +1,48 @@
 import React from 'react';
 
-const getLoadColor = (score) => {
-  if (score < 70) return 'bg-calm-teal text-calm-teal';
-  if (score < 95) return 'bg-calm-amber text-calm-amber';
-  return 'bg-calm-red text-calm-red';
-};
-
-export const LoadMeter = ({ score, label = "Sensory Load" }) => {
-  const normalized = Math.min(100, Math.max(0, ((score - 30) / 100) * 100));
-  const colorClass = getLoadColor(score);
-  const [bg, text] = colorClass.split(' ');
+export const LoadMeter = ({ zoneName, loadScore }) => {
+  // loadScore is out of 100
+  const normalized = Math.min(Math.max(loadScore, 0), 100);
+  // Dasharray is 289, so offset goes from 289 to 0
+  const dashOffset = 289 - (normalized / 100) * 289;
   
+  const getStrokeColor = (val) => {
+    if (val < 40) return 'var(--brand)';
+    if (val < 70) return 'var(--amber-fill)';
+    return 'var(--rose)';
+  };
+
   return (
-    <div className="flex flex-col gap-2 w-full">
-      <div className="flex justify-between items-center text-sm font-medium">
-        <span className="text-slate-300">{label}</span>
-        <span className={`font-display font-bold ${text}`}>{Math.round(score)} dB</span>
+    <section className="card">
+      <span className="eyebrow">Live</span>
+      <h2>Current zone load</h2>
+      <div className="meter-wrap">
+        <svg className="meter-svg" width="110" height="110" viewBox="0 0 110 110">
+          <circle cx="55" cy="55" r="46" fill="none" stroke="#E2E8F0" strokeWidth="10"/>
+          <circle 
+            id="meterArc" 
+            cx="55" cy="55" r="46" 
+            fill="none" 
+            stroke={getStrokeColor(normalized)} 
+            strokeWidth="10"
+            strokeLinecap="round" 
+            strokeDasharray="289" 
+            strokeDashoffset={dashOffset}
+            transform="rotate(-90 55 55)" 
+            style={{ transition: 'stroke-dashoffset 0.6s ease, stroke 0.6s ease' }}
+          />
+        </svg>
+        <div className="meter-legend">
+          <div className="val">{normalized}<span style={{ fontSize: '13px' }}>%</span></div>
+          <div>{zoneName} sensory load</div>
+        </div>
       </div>
-      <div className="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
-        <div 
-          className={`h-full rounded-full transition-all duration-700 ease-out ${bg}`}
-          style={{ width: `${normalized}%` }}
-        />
+      <div className="legend-dots">
+        <div className="legend-dot"><span className="dot" style={{ background: 'var(--brand)' }}></span> Calm</div>
+        <div className="legend-dot"><span className="dot" style={{ background: 'var(--amber-fill)' }}></span> Building up</div>
+        <div className="legend-dot"><span className="dot" style={{ background: 'var(--rose)' }}></span> Overstimulating</div>
+        <div className="legend-dot"><span className="dot" style={{ background: 'var(--sky)' }}></span> Reset zone</div>
       </div>
-    </div>
+    </section>
   );
 };

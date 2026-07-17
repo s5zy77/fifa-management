@@ -1,36 +1,127 @@
-import React from 'react';
-import { LoadMeter } from './LoadMeter';
+import React, { useState } from 'react';
 
-export const PlanDisplay = ({ plan, liveSignals }) => {
-  if (!plan) return null;
-  const gateSignal = liveSignals[plan.recommendedGate];
-  
+export const PlanDisplay = ({ plan, onFeedback, onShare }) => {
+  const [feedbackGiven, setFeedbackGiven] = useState(false);
+  const [toastMsg, setToastMsg] = useState('');
+
+  if (!plan) {
+    return (
+      <section className="card" aria-labelledby="plan-heading">
+        <span className="eyebrow">Step 2</span>
+        <h2 id="plan-heading">Your visit plan</h2>
+        <div className="plan-empty">Set your profile and generate a plan to see your personalized route.</div>
+      </section>
+    );
+  }
+
+  const handleFeedback = (direction) => {
+    setFeedbackGiven(true);
+    if (onFeedback) onFeedback(direction);
+  };
+
+  const handleShare = async () => {
+    if (onShare) {
+      const url = await onShare();
+      if (url) {
+        setToastMsg('Link copied to clipboard!');
+        setTimeout(() => setToastMsg(''), 2600);
+      }
+    }
+  };
+
+  const handleDownload = () => {
+    // Basic canvas rendering for plan card (from prototype)
+    const canvas = document.createElement('canvas');
+    canvas.width = 640; canvas.height = 420;
+    const ctx = canvas.getContext('2d');
+
+    ctx.fillStyle = '#F8FAFC'; ctx.fillRect(0,0,640,420);
+    ctx.fillStyle = '#FFFFFF'; ctx.fillRect(20,20,600,380);
+    const grad = ctx.createLinearGradient(40,40,80,80);
+    grad.addColorStop(0,'#0F766E'); grad.addColorStop(1,'#0369A1');
+    ctx.fillStyle = grad; 
+    ctx.beginPath();
+    ctx.roundRect(40, 40, 44, 44, 12);
+    ctx.fill();
+    ctx.fillStyle = '#FFFFFF'; ctx.font = '700 20px Outfit, sans-serif'; ctx.fillText('C', 55, 68);
+
+    ctx.fillStyle = '#0F172A'; ctx.font = '700 24px Outfit, sans-serif';
+    ctx.fillText('CalmGate — Your Visit Plan', 98, 60);
+    ctx.fillStyle = '#475569'; ctx.font = '400 13px Inter, sans-serif';
+    ctx.fillText('Sensory-friendly stadium companion', 98, 78);
+
+    let y = 130;
+    const rows = [
+      ['Recommended gate', plan.plan.recommendedGate],
+      ['Best arrival window', plan.plan.bestArrivalWindow],
+      ['Nearest reset zone', plan.plan.nearestResetZone],
+    ];
+    rows.forEach(([label, val]) => {
+      ctx.fillStyle = '#0F766E'; ctx.font = '600 12px Inter, sans-serif';
+      ctx.fillText(label.toUpperCase(), 40, y);
+      ctx.fillStyle = '#0F172A'; ctx.font = '500 18px Inter, sans-serif';
+      ctx.fillText(val, 40, y + 24);
+      y += 66;
+    });
+
+    const link = document.createElement('a');
+    link.download = 'calmgate-plan.png';
+    link.href = canvas.toDataURL();
+    link.click();
+  };
+
   return (
-    <div className="bg-slate-800/60 rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.1)] border border-slate-700 w-full mb-6">
-      <h2 className="text-xl font-display text-slate-100 mb-4">Your AI Visit Plan</h2>
-      <div className="grid grid-cols-2 gap-4 mb-6">
-        <div className="bg-slate-900/50 p-4 rounded-2xl border border-slate-700/50">
-          <p className="text-xs text-slate-400 mb-1">Arrival Window</p>
-          <p className="text-lg font-display text-calm-teal">{plan.bestArrivalWindow}</p>
+    <section className="card" aria-labelledby="plan-heading">
+      <span className="eyebrow">Step 2</span>
+      <h2 id="plan-heading">Your visit plan</h2>
+      
+      <div>
+        <div className="plan-row">
+          <div className="plan-icon">🚪</div>
+          <div>
+            <h3>Recommended gate</h3>
+            <p>{plan.plan.recommendedGate}</p>
+          </div>
         </div>
-        <div className="bg-slate-900/50 p-4 rounded-2xl border border-slate-700/50">
-          <p className="text-xs text-slate-400 mb-1">Recommended Gate</p>
-          <p className="text-lg font-display text-slate-200">{plan.recommendedGate}</p>
+        <div className="plan-row">
+          <div className="plan-icon">🕒</div>
+          <div>
+            <h3>Best arrival window</h3>
+            <p>{plan.plan.bestArrivalWindow}</p>
+          </div>
+        </div>
+        <div className="plan-row">
+          <div className="plan-icon">🌿</div>
+          <div>
+            <h3>Nearest reset zone</h3>
+            <p>{plan.plan.nearestResetZone}</p>
+          </div>
+        </div>
+        <div className="reasoning-box">
+          <strong>Why this plan:</strong> {plan.plan.explanation}
+        </div>
+
+        <div className="feedback-block">
+          {!feedbackGiven ? (
+            <>
+              <p>Was this route calm for you?</p>
+              <div className="feedback-btns">
+                <button className="feedback-btn" onClick={() => handleFeedback('up')} aria-label="Yes, this route was calm">👍</button>
+                <button className="feedback-btn" onClick={() => handleFeedback('down')} aria-label="No, this route was overwhelming">👎</button>
+              </div>
+            </>
+          ) : (
+            <span className="feedback-thanks" style={{ display: 'inline' }}>Thanks — we'll factor this into future plans.</span>
+          )}
+        </div>
+
+        <div className="share-row">
+          <button className="btn-secondary" onClick={handleDownload}>⬇ Save plan card</button>
+          <button className="btn-secondary" onClick={handleShare}>🔗 Copy shareable link</button>
         </div>
       </div>
       
-      {gateSignal && (
-        <div className="mb-6">
-          <LoadMeter score={gateSignal.noiseDb} label={`Live Load at ${plan.recommendedGate}`} />
-        </div>
-      )}
-
-      <div className="bg-slate-900/80 p-4 rounded-2xl border border-slate-700">
-        <p className="text-sm text-slate-300 leading-relaxed font-body">
-          <span className="font-semibold text-calm-teal font-display block mb-1">Why this route?</span>
-          {plan.explanation}
-        </p>
-      </div>
-    </div>
+      <div className={`toast ${toastMsg ? 'show' : ''}`}>{toastMsg}</div>
+    </section>
   );
 };

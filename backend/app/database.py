@@ -1,6 +1,9 @@
 from sqlmodel import SQLModel, create_engine, Session
 import os
 
+from app.models.user import User
+from app.models.feedback import Feedback
+from app.models.shared_plan import SharedPlan
 # We will place the db file in the backend root directory
 sqlite_file_name = "calmgate.db"
 sqlite_url = f"sqlite:///{sqlite_file_name}"

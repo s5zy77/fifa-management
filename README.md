@@ -129,9 +129,9 @@ Because "no hardcoded logic pretending to be AI" was a hard requirement, here's 
 CalmGate's own UI follows the same sensory principles it's built to protect:
 
 - **No autoplay motion, no flashing.** Full `prefers-reduced-motion` compliance throughout.
-- **Dark-by-default.** Brightness and glare are themselves sensory triggers for this audience — light mode is opt-in, not default.
-- **The Sensory Load Scale** is the app's visual signature — a calm teal → warm amber → muted red gradient used consistently across the `LoadMeter` and `StadiumMap` components, so a fan (or a judge) can read stadium state at a glance.
-- **WCAG-AA verified**, not assumed. Every text/background pairing was checked against a 4.5:1 (normal text) / 3.0:1 (large text/UI) contrast ratio before the palette was finalized. *(Verified ratios: see `/frontend/CONTRAST.md`.)*
+- **Light Default / Dark Toggle.** The app defaults to the calm "Soft Stone" light palette (`#F8FAFC`). Because bright white backgrounds can sometimes be a direct sensory trigger, a user-selectable Dark Mode toggle (`#0F172A`) is fully supported and persisted.
+- **The Sensory Load Scale** is the app's visual signature — a calm teal → warm amber → muted red gradient used consistently across the `LoadMeter` and `StadiumMap` components.
+- **WCAG-AA verified**, not assumed. Every text/background pairing was checked against a 4.5:1 (normal text) / 3.0:1 (large text/UI) contrast ratio before the palette was finalized. Both Light and Dark themes pass WCAG AA.
 - **The Stadium Map isn't decoration.** Zones are plotted from real `{x, y}` coordinates, colored live from real signal data, and the AI's recommended route draws itself onto the map — because showing an AI's reasoning is more convincing than describing it.
 
 ## Getting Started
@@ -195,6 +195,7 @@ Swapping `data/*.json` for a different venue's zone graph is the only change req
 - No real IoT sensor integration — this is a reasoning and UX proof of concept, not a hardware deployment
 - Quiet-zone capacity isn't modeled (a "safe" zone could theoretically fill up)
 - Multilingual support covers 5 languages, not the full range spoken by a global fanbase
+- **JWT Storage**: The JSON Web Token (JWT) is currently stored in `localStorage` rather than an `httpOnly` cookie. This was a deliberate tradeoff for the PromptWars hackathon timeline to avoid CORS complexity in a Vercel/Render decoupled deployment, but it does expose the token to potential XSS vulnerabilities. In a production environment, this should be migrated to `httpOnly` cookies.
 
 ## What I'd Build Next
 

@@ -6,8 +6,12 @@ class LLMService:
     def __init__(self):
         # We initialize the client using standard environment variables.
         # This makes it generic and compatible with OpenAI, Azure, or OSS endpoints.
+        self.api_key = os.getenv("OPENAI_API_KEY")
+        if not self.api_key:
+            raise RuntimeError("CRITICAL STARTUP ERROR: OPENAI_API_KEY is not set in the environment. The backend cannot start.")
+            
         self.client = OpenAI(
-            api_key=os.getenv("OPENAI_API_KEY", "dummy"),
+            api_key=self.api_key,
             base_url=os.getenv("OPENAI_BASE_URL", "https://api.openai.com/v1")
         )
         # Using a very low temperature (0.2) to ensure the AI's reasoning is 

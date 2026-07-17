@@ -1,118 +1,166 @@
 import React, { useState } from 'react';
-import { createProfile } from '../utils/api';
-import { useNavigate } from 'react-router-dom';
 
-export const ProfileWizard = ({ onComplete }) => {
-  const navigate = useNavigate();
+export const ProfileWizard = ({ onGeneratePlan, isGenerating }) => {
   const [profile, setProfile] = useState({
-    preferredLanguage: 'en',
-    sensitivity: {
-      noise: 5,
-      light: 5,
-      crowd: 5,
-      movement: 5,
-      quietExit: false,
-      serviceAnimal: false
-    }
+    noise: 4,
+    light: 5,
+    crowd: 6,
+    movement: 3,
+    quietExit: true,
+    serviceAnimal: false
   });
-  const [loading, setLoading] = useState(false);
 
-  const updateSensitivity = (key, value) => {
-    setProfile(p => ({ ...p, sensitivity: { ...p.sensitivity, [key]: value } }));
+  const [companionOn, setCompanionOn] = useState(false);
+  const [companion, setCompanion] = useState({
+    name: '',
+    noise: 4,
+    crowd: 6,
+    mobility: 2
+  });
+
+  const handleSubmit = () => {
+    onGeneratePlan({
+      ...profile,
+      companion: companionOn ? companion : null
+    });
   };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      const saved = await createProfile(profile);
-      localStorage.setItem('calmgate_profile_id', saved.id);
-      if (onComplete) onComplete(saved);
-      navigate('/dashboard');
-    } catch (err) {
-      alert("Error saving profile: " + err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const renderSlider = (key, label, desc) => (
-    <div className="mb-6">
-      <div className="flex justify-between items-center mb-1">
-        <label className="font-display text-slate-200">{label}</label>
-        <span className="text-calm-amber font-display font-bold">{profile.sensitivity[key]}</span>
-      </div>
-      <p className="text-xs text-slate-400 mb-2">{desc}</p>
-      <input 
-        type="range" min="0" max="10" 
-        value={profile.sensitivity[key]}
-        onChange={e => updateSensitivity(key, parseInt(e.target.value))}
-        className="w-full accent-calm-teal bg-slate-700 h-2 rounded-lg appearance-none cursor-pointer"
-        data-testid={`slider-${key}`}
-      />
-    </div>
-  );
 
   return (
-    <div className="max-w-md mx-auto bg-slate-800/80 p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.1)] border border-slate-700 mt-10">
-      <h2 className="text-2xl font-display text-slate-100 mb-6">Create Sensory Profile</h2>
-      <form onSubmit={handleSubmit} data-testid="profile-form">
-        
-        <div className="mb-6">
-          <label className="font-display text-slate-200 block mb-2">Preferred Language</label>
-          <select 
-            value={profile.preferredLanguage}
-            onChange={e => setProfile({...profile, preferredLanguage: e.target.value})}
-            className="w-full bg-slate-900 border border-slate-600 rounded-xl p-3 text-slate-200 focus:outline-none focus:border-calm-teal"
-            data-testid="lang-select"
-          >
-            <option value="en">English</option>
-            <option value="es">Español</option>
-            <option value="fr">Français</option>
-            <option value="pt">Português</option>
-            <option value="ar">العربية</option>
-          </select>
+    <section className="card" aria-labelledby="profile-heading">
+      <span className="eyebrow">Step 1</span>
+      <h2 id="profile-heading">Your sensory profile</h2>
+      <p className="sub">Tell us what affects you — this shapes every recommendation.</p>
+
+      {/* Primary Profile Sliders */}
+      <div className="field">
+        <div className="field-label">
+          <label htmlFor="noise">Noise sensitivity</label>
+          <span className="field-value">{profile.noise}</span>
         </div>
+        <input 
+          type="range" id="noise" min="0" max="10" 
+          value={profile.noise} 
+          onChange={(e) => setProfile(p => ({...p, noise: +e.target.value}))} 
+        />
+      </div>
+      <div className="field">
+        <div className="field-label">
+          <label htmlFor="light">Light sensitivity</label>
+          <span className="field-value">{profile.light}</span>
+        </div>
+        <input 
+          type="range" id="light" min="0" max="10" 
+          value={profile.light} 
+          onChange={(e) => setProfile(p => ({...p, light: +e.target.value}))} 
+        />
+      </div>
+      <div className="field">
+        <div className="field-label">
+          <label htmlFor="crowd">Crowd proximity</label>
+          <span className="field-value">{profile.crowd}</span>
+        </div>
+        <input 
+          type="range" id="crowd" min="0" max="10" 
+          value={profile.crowd} 
+          onChange={(e) => setProfile(p => ({...p, crowd: +e.target.value}))} 
+        />
+      </div>
+      <div className="field">
+        <div className="field-label">
+          <label htmlFor="movement">Unpredictable movement</label>
+          <span className="field-value">{profile.movement}</span>
+        </div>
+        <input 
+          type="range" id="movement" min="0" max="10" 
+          value={profile.movement} 
+          onChange={(e) => setProfile(p => ({...p, movement: +e.target.value}))} 
+        />
+        <p className="field-hint">Sudden motion, flashing screens, crowd surges</p>
+      </div>
 
-        {renderSlider('noise', 'Noise Sensitivity', '0 = Highly tolerant, 10 = Needs absolute quiet')}
-        {renderSlider('light', 'Light Sensitivity', '0 = Tolerant to bright/flashing, 10 = Needs dim/steady')}
-        {renderSlider('crowd', 'Crowd Density', '0 = Fine in crowds, 10 = Needs wide personal space')}
-        {renderSlider('movement', 'Unpredictable Movement', '0 = Unaffected, 10 = Overwhelmed by busy motion')}
+      {/* Toggles */}
+      <div className="toggle-row">
+        <label htmlFor="quietExit">I need a quiet exit route</label>
+        <div className="switch">
+          <input 
+            type="checkbox" id="quietExit" 
+            checked={profile.quietExit} 
+            onChange={e => setProfile(p => ({...p, quietExit: e.target.checked}))}
+          />
+          <span className="slider-pill"></span>
+        </div>
+      </div>
+      <div className="toggle-row">
+        <label htmlFor="serviceAnimal">Travelling with a service animal</label>
+        <div className="switch">
+          <input 
+            type="checkbox" id="serviceAnimal" 
+            checked={profile.serviceAnimal} 
+            onChange={e => setProfile(p => ({...p, serviceAnimal: e.target.checked}))}
+          />
+          <span className="slider-pill"></span>
+        </div>
+      </div>
 
-        <div className="flex items-center justify-between mb-4">
-          <div>
-            <div className="font-display text-slate-200">Quiet Exit Required</div>
-            <div className="text-xs text-slate-400">Needs a low-stimulus egress path</div>
+      {/* Companion Mode */}
+      <div className="companion-toggle-row">
+        <label htmlFor="companionMode">Plan for a companion too</label>
+        <div className="switch">
+          <input 
+            type="checkbox" id="companionMode" 
+            checked={companionOn}
+            onChange={e => setCompanionOn(e.target.checked)}
+          />
+          <span className="slider-pill"></span>
+        </div>
+      </div>
+
+      <div className={`companion-panel ${companionOn ? 'open' : ''}`}>
+        <h4>Companion's sensory profile</h4>
+        <input 
+          type="text" 
+          placeholder="Companion's name (optional)" 
+          value={companion.name}
+          onChange={e => setCompanion(c => ({...c, name: e.target.value}))}
+        />
+        <div className="field">
+          <div className="field-label">
+            <label htmlFor="cNoise">Noise sensitivity</label>
+            <span className="field-value">{companion.noise}</span>
           </div>
           <input 
-            type="checkbox" 
-            checked={profile.sensitivity.quietExit}
-            onChange={e => updateSensitivity('quietExit', e.target.checked)}
-            className="w-5 h-5 accent-calm-teal cursor-pointer"
+            type="range" id="cNoise" min="0" max="10" 
+            value={companion.noise}
+            onChange={e => setCompanion(c => ({...c, noise: +e.target.value}))}
           />
         </div>
-
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <div className="font-display text-slate-200">Service Animal</div>
-            <div className="text-xs text-slate-400">Travels with a support animal</div>
+        <div className="field">
+          <div className="field-label">
+            <label htmlFor="cCrowd">Crowd proximity</label>
+            <span className="field-value">{companion.crowd}</span>
           </div>
           <input 
-            type="checkbox" 
-            checked={profile.sensitivity.serviceAnimal}
-            onChange={e => updateSensitivity('serviceAnimal', e.target.checked)}
-            className="w-5 h-5 accent-calm-teal cursor-pointer"
+            type="range" id="cCrowd" min="0" max="10" 
+            value={companion.crowd}
+            onChange={e => setCompanion(c => ({...c, crowd: +e.target.value}))}
           />
         </div>
+        <div className="field" style={{ marginBottom: 0 }}>
+          <div className="field-label">
+            <label htmlFor="cMobility">Mobility / access needs</label>
+            <span className="field-value">{companion.mobility}</span>
+          </div>
+          <input 
+            type="range" id="cMobility" min="0" max="10" 
+            value={companion.mobility}
+            onChange={e => setCompanion(c => ({...c, mobility: +e.target.value}))}
+          />
+        </div>
+      </div>
 
-        <button 
-          type="submit" 
-          disabled={loading}
-          className="w-full bg-calm-teal text-slate-900 font-display font-bold py-3 px-4 rounded-xl hover:bg-teal-300 transition-colors disabled:opacity-50"
-        >
-          {loading ? 'Generating...' : 'Save & Continue'}
-        </button>
-      </form>
-    </div>
+      <button className="btn-primary" onClick={handleSubmit} disabled={isGenerating}>
+        {isGenerating ? "Generating..." : "Generate my plan →"}
+      </button>
+    </section>
   );
 };
