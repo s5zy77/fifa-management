@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export const ProfileWizard = ({ onGeneratePlan, isGenerating, t }) => {
+export const ProfileWizard = ({ onGeneratePlan, isGenerating, t = (k) => k }) => {
   const [profile, setProfile] = useState({
     noise: 4,
     light: 5,

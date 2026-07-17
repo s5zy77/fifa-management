@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export const PlanDisplay = ({ plan, onFeedback, onShare, t }) => {
+export const PlanDisplay = ({ plan, onFeedback, onShare, t = (k) => k }) => {
   const [feedbackGiven, setFeedbackGiven] = useState(false);
   const [toastMsg, setToastMsg] = useState('');
 

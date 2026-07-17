@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const LoadMeter = ({ zoneName, loadScore, t }) => {
+export const LoadMeter = ({ zoneName, loadScore, t = (k) => k }) => {
   const normalized = Math.min(Math.max(loadScore, 0), 100);
   const dashOffset = 289 - (normalized / 100) * 289;
   

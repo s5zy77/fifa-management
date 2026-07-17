@@ -10,9 +10,19 @@ class LLMService:
         if not self.api_key:
             raise RuntimeError("CRITICAL STARTUP ERROR: OPENAI_API_KEY is not set in the environment. The backend cannot start.")
             
+        base_url = os.getenv("OPENAI_BASE_URL", "https://api.openai.com/v1")
+        is_google = "googleapis.com" in base_url
+        headers = {}
+        # Google's OpenAI-compatibility endpoint authenticates via x-goog-api-key header
+        # and ignores the Bearer token, so we pass the real key there
+        # and use a dummy placeholder for the openai client's Bearer requirement.
+        if is_google:
+            headers["x-goog-api-key"] = self.api_key
+
         self.client = OpenAI(
-            api_key=self.api_key,
-            base_url=os.getenv("OPENAI_BASE_URL", "https://api.openai.com/v1")
+            api_key=self.api_key if not is_google else "not-used",
+            base_url=base_url,
+            default_headers=headers
         )
         # Using a very low temperature (0.2) to ensure the AI's reasoning is 
         # consistent and highly deterministic for identical inputs during demo.
